@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>타인 x의 초상</title>
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="bgm-placeholder"></div>
+  <canvas id="blur-canvas"></canvas>
+  <div id="main-container">
+    <!-- 0번 창: 홈 -->
+    <div class="page" id="page-0">
+      <h1 class="title">&lt;타인 X의 초상&gt;</h1>
+      <p class="desc">
+        인간은 그저 '보인다'는 이유만으로 상대방을 안다는 착각 속에 빠지곤 한다.<br>
+        그러나 눈이 읽어내는 것은 단지 대상의 형태적 특징에 불과하며, 표면 너머의 내면에 관한 한 우리는 모두 타인에 대해 무지한 존재들이다.<br>
+        《타인 x의 초상》은 이러한 감각과 실제 사이의 불일치로부터 영감을 얻은 인터랙티브 미디어아트이다.<br>
+        두 참여자 간의 관계를 기반으로 구성된 이 작품은 타인에 대해 '보이는 것'과 '아는 것' 사이의 간극을 시각적으로 표현함으로써 '서로를 안다는 믿음'이 지닌 환상성을 탐구한다.
+      </p>
+      <div class="button-row">
+        <div class="main-btn-block">
+          <button class="main-btn" id="btn-a" type="button">나의 초상 남기기</button>
+          <span class="sub-caption">나에 대해 알고 싶다면 클릭하세요.</span>
+        </div>
+        <div class="main-btn-block">
+          <button class="main-btn" id="btn-b" type="button">타인의 초상 그리기</button>
+          <span class="sub-caption">당신을 초대한 사람이 있다면 클릭하세요.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1번 창: A 프롤로그 -->
+    <div class="page" id="page-a-prologue" style="display:none;">
+      <div id="a-prologue-text" class="fade-seq"></div>
+      <button id="a-prologue-skip" class="skip-btn" type="button">skip</button>
+    </div>
+
+    <!-- 2번 창: A 얼굴 촬영 -->
+    <div class="page" id="page-a-photo" style="display:none;">
+      <h2>얼굴 촬영 동의</h2>
+      <p>본 프로젝트는 예술/연구 목적으로만 사용됩니다.<br>얼굴 사진 제공에 동의하십니까?</p>
+      <button id="btn-photo-consent" type="button">촬영 동의</button>
+      <div id="camera-area" style="display:none;">
+        <video id="video" autoplay playsinline></video>
+        <button id="btn-capture" type="button">촬영</button>
+        <canvas id="photo-canvas" style="display:none;"></canvas>
+        <div id="photo-preview"></div>
+        <button id="btn-photo-next" style="display:none;" type="button">다음</button>
+      </div>
+    </div>
+
+    <!-- 3번 창: A 질문 -->
+    <div class="page" id="page-a-quiz" style="display:none;">
+      <div id="question-box">
+        <div id="question-text"></div>
+        <div id="answer-area"></div>
+        <button id="btn-next-question" style="display:none;" type="button">다음</button>
+      </div>
+      <div id="color-splash"></div>
+    </div>
+
+    <!-- 4번 창: A 결과/초대 -->
+    <div class="page" id="page-a-result" style="display:none;">
+      <div id="a-summary"></div>
+      <div class="invite-section">
+        <button id="btn-copy-link" class="copy-link-btn" type="button">
+          당신의 지인은 당신에 대해 얼마나 알고 있을까요?<br>링크를 보내 확인하세요
+        </button>
+        <span>세션 아이디: <span id="session-id"></span></span>
+      </div>
+      <a href="#" id="go-home-link">홈으로 돌아가기</a>
+    </div>
+
+    <!-- 1번 창: B 세션 아이디 입력 -->
+    <div class="page" id="page-b-session" style="display:none;">
+      <h2>세션 아이디를 입력하세요</h2>
+      <input type="text" id="input-session" maxlength="12" placeholder="세션 아이디 입력">
+      <button id="btn-session-enter" type="button">입력</button>
+      <div id="session-error" class="error"></div>
+    </div>
+
+    <!-- 2번 창: B 퀴즈 -->
+    <div class="page" id="page-b-quiz" style="display:none;">
+      <div id="b-photo-area">
+        <img id="b-face-img" src="" alt="A의 얼굴" />
+        <canvas id="b-collage-canvas" style="display:none;"></canvas>
+      </div>
+      <div id="b-question-box">
+        <div id="b-question-text"></div>
+        <div id="b-answer-area"></div>
+        <button id="btn-b-next-question" style="display:none;" type="button">다음</button>
+      </div>
+    </div>
+
+    <!-- 3번 창: B 에필로그 -->
+    <div class="page" id="page-b-epilogue" style="display:none;">
+      <div id="b-epilogue-text" class="fade-seq"></div>
+      <div id="b-epilogue-input" style="display:none;">
+        <input type="text" id="b-short-answer" maxlength="10" placeholder="짧은 단어로 답변">
+        <button id="btn-b-epilogue-next" type="button">결과 보기</button>
+      </div>
+    </div>
+
+    <!-- 4번 창: B 결과/다운로드 -->
+    <div class="page" id="page-b-result" style="display:none;">
+      <div id="b-result-postcard">
+        <canvas id="postcard-canvas" width="600" height="900"></canvas>
+      </div>
+      <button id="btn-download-postcard" type="button">엽서 PNG 다운로드</button>
+      <button id="btn-b-home" type="button">처음으로 돌아가기</button>
+    </div>
+  </div>
+  <script src="script.js" defer></script>
+</body>
+</html>
