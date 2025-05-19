@@ -104,20 +104,22 @@ body {
 }
 
 #video {
-  width: 480px;
-  height: 640px;
-  border-radius: 0; /* 원형 제거 */
+  width: 360px;
+  height: 480px;
+  border-radius: 0;
   object-fit: cover;
-  box-shadow: 0 0 60px 0 rgba(0,0,0,0.10);
+  filter: none;
   margin-bottom: 24px;
+  background: #eee;
 }
 
 #photo-preview img {
-  width: 480px;
-  height: 640px;
-  border-radius: 0; /* 원형 제거 */
+  width: 360px;
+  height: 480px;
+  border-radius: 0;
   object-fit: cover;
-  box-shadow: 0 0 60px 0 rgba(0,0,0,0.14);
+  background: #eee;
+  margin-bottom: 24px;
 }
 
 #btn-photo-next {
@@ -135,30 +137,52 @@ body {
   box-shadow: 0 0 60px 0 rgba(0,0,0,0.07);
   text-align: center;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#color-splash {
-  position: absolute;
-  left: 0; top: 0; width: 100vw; height: 100vh;
-  pointer-events: none;
-  z-index: 9;
-  opacity: 0;
-  transition: opacity 1.2s;
+#question-text, #b-question-text {
+  text-align: center;
+  margin: 20px 0;
+  width: 100%;
 }
 
-.answer-btn, .choice-btn {
+#answer-area, #b-answer-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+#btn-next-question, #btn-b-next-question {
+  background: #000 !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 12px 40px !important;
+  margin-top: 20px !important;
+  border-radius: 20px;
+  font-size: 20px;
+  display: none;
+}
+
+.choice-btn, .answer-btn {
   background: #fff;
   color: #000;
   border: 2px solid #000;
   border-radius: 20px;
   font-size: 20px;
-  margin: 16px 10px;
+  margin: 8px 0;
   padding: 18px 40px;
   cursor: pointer;
   letter-spacing: 0.10em;
   transition: background 0.2s, color 0.2s;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
 }
-.answer-btn:hover, .choice-btn:hover {
+.choice-btn:hover, .choice-btn.selected, .answer-btn:hover {
   background: #000;
   color: #fff;
 }
@@ -178,8 +202,21 @@ input[type="text"], input[type="number"] {
   margin: 40px 0 20px 0;
   font-size: 18px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 20px;
+}
+
+.copy-link-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 18px 32px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .error {
@@ -271,25 +308,4 @@ input[type="text"], input[type="number"] {
   width: 100vw; height: 100vh;
   z-index: 0;
   pointer-events: none;
-}
-
-/* style.css 추가 */
-#question-text, #b-question-text {
-  text-align: center;
-  margin: 20px 0;
-}
-
-#answer-area, #b-answer-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-#btn-next-question, #btn-b-next-question {
-  background: #000 !important;
-  color: #fff !important;
-  border: none !important;
-  padding: 12px 40px !important;
-  margin-top: 20px !important;
 }
