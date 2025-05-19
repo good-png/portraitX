@@ -257,17 +257,14 @@ function showASummary() {
 
 // 복사 버튼: 링크+세션아이디 동시 복사
 document.getElementById('btn-copy-link').onclick = () => {
-  const link = "https://your-website-url.com"; // 실제 링크로 변경
+  const link = "https://good-png.github.io/portraitX/"; // ← 실제 배포 주소로 수정!
   const sessionId = document.getElementById('session-id').innerText;
   const text = `우리는 서로를 얼마나 알고 있을까요?\n다음 링크에서 세션 아이디를 입력하여 저에 대한 질문에 답변해주세요.\n웹사이트 링크: ${link}\n세션 아이디: ${sessionId}`;
   navigator.clipboard.writeText(text)
     .then(() => alert('링크와 세션 아이디가 복사되었습니다!'))
     .catch(err => console.error('복사 실패:', err));
 };
-document.getElementById('go-home-link').onclick = (e) => {
-  e.preventDefault();
-  location.reload();
-};
+
 
 // ------------------------
 // [B 세션 아이디 입력]
